@@ -1,0 +1,13 @@
+[2025-09-09T14:53:07.131+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: banvic_etl.extract_csv scheduled__2025-09-07T04:35:00+00:00 [queued]>
+[2025-09-09T14:53:07.183+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: banvic_etl.extract_csv scheduled__2025-09-07T04:35:00+00:00 [queued]>
+[2025-09-09T14:53:07.185+0000] {taskinstance.py:2170} INFO - Starting attempt 2 of 3
+[2025-09-09T14:53:07.254+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): extract_csv> on 2025-09-07 04:35:00+00:00
+[2025-09-09T14:53:07.286+0000] {standard_task_runner.py:60} INFO - Started process 398 to run task
+[2025-09-09T14:53:07.297+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'banvic_etl', 'extract_csv', 'scheduled__2025-09-07T04:35:00+00:00', '--job-id', '107', '--raw', '--subdir', 'DAGS_FOLDER/bavic_dag.py', '--cfg-path', '/tmp/tmpwcpp3r18']
+[2025-09-09T14:53:07.305+0000] {standard_task_runner.py:88} INFO - Job 107: Subtask extract_csv
+[2025-09-09T14:53:07.978+0000] {task_command.py:423} INFO - Running <TaskInstance: banvic_etl.extract_csv scheduled__2025-09-07T04:35:00+00:00 [running]> on host 9948058d4968
+[2025-09-09T14:53:08.985+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='Paulo' AIRFLOW_CTX_DAG_ID='banvic_etl' AIRFLOW_CTX_TASK_ID='extract_csv' AIRFLOW_CTX_EXECUTION_DATE='2025-09-07T04:35:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-07T04:35:00+00:00'
+[2025-09-09T14:53:09.555+0000] {python.py:201} INFO - Done. Returned value was: None
+[2025-09-09T14:53:09.732+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=banvic_etl, task_id=extract_csv, execution_date=20250907T043500, start_date=20250909T145307, end_date=20250909T145309
+[2025-09-09T14:53:09.862+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2025-09-09T14:53:10.138+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

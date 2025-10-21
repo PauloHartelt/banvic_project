@@ -1,0 +1,32 @@
+[2025-09-04T16:49:16.168+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: banvic_etl.extract_sql_db scheduled__2025-09-03T04:35:00+00:00 [queued]>
+[2025-09-04T16:49:16.183+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: banvic_etl.extract_sql_db scheduled__2025-09-03T04:35:00+00:00 [queued]>
+[2025-09-04T16:49:16.184+0000] {taskinstance.py:2170} INFO - Starting attempt 2 of 2
+[2025-09-04T16:49:16.221+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): extract_sql_db> on 2025-09-03 04:35:00+00:00
+[2025-09-04T16:49:16.241+0000] {standard_task_runner.py:60} INFO - Started process 1071 to run task
+[2025-09-04T16:49:16.249+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'banvic_etl', 'extract_sql_db', 'scheduled__2025-09-03T04:35:00+00:00', '--job-id', '14', '--raw', '--subdir', 'DAGS_FOLDER/banvic_dag.py', '--cfg-path', '/tmp/tmph236lnjs']
+[2025-09-04T16:49:16.259+0000] {standard_task_runner.py:88} INFO - Job 14: Subtask extract_sql_db
+[2025-09-04T16:49:16.510+0000] {task_command.py:423} INFO - Running <TaskInstance: banvic_etl.extract_sql_db scheduled__2025-09-03T04:35:00+00:00 [running]> on host 6a8f9d7ec58e
+[2025-09-04T16:49:16.851+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='you' AIRFLOW_CTX_DAG_ID='banvic_etl' AIRFLOW_CTX_TASK_ID='extract_sql_db' AIRFLOW_CTX_EXECUTION_DATE='2025-09-03T04:35:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-03T04:35:00+00:00'
+[2025-09-04T16:49:16.856+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/scripts/extract_helpers.py", line 18, in extract_sql_db
+    os.makedirs(out_dir_base, exist_ok=True)
+  File "<frozen os>", line 215, in makedirs
+  File "<frozen os>", line 215, in makedirs
+  File "<frozen os>", line 215, in makedirs
+  [Previous line repeated 2 more times]
+  File "<frozen os>", line 225, in makedirs
+PermissionError: [Errno 13] Permission denied: '/path'
+[2025-09-04T16:49:16.929+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=banvic_etl, task_id=extract_sql_db, execution_date=20250903T043500, start_date=20250904T164916, end_date=20250904T164916
+[2025-09-04T16:49:16.977+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 14 for task extract_sql_db ([Errno 13] Permission denied: '/path'; 1071)
+[2025-09-04T16:49:17.068+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-09-04T16:49:17.289+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,28 @@
+[2025-09-09T14:52:58.048+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: banvic_etl.extract_sql_db manual__2025-09-04T16:49:13.653051+00:00 [queued]>
+[2025-09-09T14:52:58.212+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: banvic_etl.extract_sql_db manual__2025-09-04T16:49:13.653051+00:00 [queued]>
+[2025-09-09T14:52:58.215+0000] {taskinstance.py:2170} INFO - Starting attempt 8 of 9
+[2025-09-09T14:52:58.479+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): extract_sql_db> on 2025-09-04 16:49:13.653051+00:00
+[2025-09-09T14:52:58.534+0000] {standard_task_runner.py:60} INFO - Started process 361 to run task
+[2025-09-09T14:52:58.632+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'banvic_etl', 'extract_sql_db', 'manual__2025-09-04T16:49:13.653051+00:00', '--job-id', '98', '--raw', '--subdir', 'DAGS_FOLDER/bavic_dag.py', '--cfg-path', '/tmp/tmpx3zdpged']
+[2025-09-09T14:52:58.659+0000] {standard_task_runner.py:88} INFO - Job 98: Subtask extract_sql_db
+[2025-09-09T14:53:00.421+0000] {task_command.py:423} INFO - Running <TaskInstance: banvic_etl.extract_sql_db manual__2025-09-04T16:49:13.653051+00:00 [running]> on host 9948058d4968
+[2025-09-09T14:53:01.978+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='Paulo' AIRFLOW_CTX_DAG_ID='banvic_etl' AIRFLOW_CTX_TASK_ID='extract_sql_db' AIRFLOW_CTX_EXECUTION_DATE='2025-09-04T16:49:13.653051+00:00' AIRFLOW_CTX_TRY_NUMBER='8' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-09-04T16:49:13.653051+00:00'
+[2025-09-09T14:53:03.055+0000] {logging_mixin.py:188} WARNING - /opt/airflow/scripts/extract_helpers.py:33 UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2025-09-09T14:53:03.264+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/scripts/extract_helpers.py", line 36, in extract_sql_db
+    os.replace(tmp, os.path.join(out_dir_base, f'{table}.csv'))
+FileNotFoundError: [Errno 2] No such file or directory: '/opt/airflow/outputs/2025-09-04/sql/agencias.tmp' -> '/opt/airflow/outputs/2025-09-04/sql/agencias.csv'
+[2025-09-09T14:53:03.505+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=banvic_etl, task_id=extract_sql_db, execution_date=20250904T164913, start_date=20250909T145258, end_date=20250909T145303
+[2025-09-09T14:53:03.609+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 98 for task extract_sql_db ([Errno 2] No such file or directory: '/opt/airflow/outputs/2025-09-04/sql/agencias.tmp' -> '/opt/airflow/outputs/2025-09-04/sql/agencias.csv'; 361)
+[2025-09-09T14:53:04.052+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-09-09T14:53:04.197+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,28 @@
+[2025-09-04T20:21:38.550+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: banvic_etl.extract_csv manual__2025-09-04T20:21:36.333567+00:00 [queued]>
+[2025-09-04T20:21:38.567+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: banvic_etl.extract_csv manual__2025-09-04T20:21:36.333567+00:00 [queued]>
+[2025-09-04T20:21:38.568+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-09-04T20:21:38.609+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): extract_csv> on 2025-09-04 20:21:36.333567+00:00
+[2025-09-04T20:21:38.628+0000] {standard_task_runner.py:60} INFO - Started process 206 to run task
+[2025-09-04T20:21:38.637+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'banvic_etl', 'extract_csv', 'manual__2025-09-04T20:21:36.333567+00:00', '--job-id', '28', '--raw', '--subdir', 'DAGS_FOLDER/banvic_dag.py', '--cfg-path', '/tmp/tmp89hc268e']
+[2025-09-04T20:21:38.643+0000] {standard_task_runner.py:88} INFO - Job 28: Subtask extract_csv
+[2025-09-04T20:21:38.944+0000] {task_command.py:423} INFO - Running <TaskInstance: banvic_etl.extract_csv manual__2025-09-04T20:21:36.333567+00:00 [running]> on host c181d38c454f
+[2025-09-04T20:21:39.447+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='you' AIRFLOW_CTX_DAG_ID='banvic_etl' AIRFLOW_CTX_TASK_ID='extract_csv' AIRFLOW_CTX_EXECUTION_DATE='2025-09-04T20:21:36.333567+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-09-04T20:21:36.333567+00:00'
+[2025-09-04T20:21:39.711+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/scripts/extract_helpers.py", line 12, in extract_csv
+    os.replace(tmp, os.path.join(dest_dir, 'transacoes.csv'))  # atomic
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/opt/airflow/outputs/2025-09-04/csv/transacoes.tmp' -> '/opt/airflow/outputs/2025-09-04/csv/transacoes.csv'
+[2025-09-04T20:21:39.779+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=banvic_etl, task_id=extract_csv, execution_date=20250904T202136, start_date=20250904T202138, end_date=20250904T202139
+[2025-09-04T20:21:39.829+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 28 for task extract_csv ([Errno 2] No such file or directory: '/opt/airflow/outputs/2025-09-04/csv/transacoes.tmp' -> '/opt/airflow/outputs/2025-09-04/csv/transacoes.csv'; 206)
+[2025-09-04T20:21:39.858+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-09-04T20:21:39.958+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

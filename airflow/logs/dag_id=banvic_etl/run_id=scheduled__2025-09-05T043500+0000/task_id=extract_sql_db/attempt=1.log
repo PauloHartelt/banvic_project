@@ -1,0 +1,16 @@
+[2025-09-06T14:01:59.718+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: banvic_etl.extract_sql_db scheduled__2025-09-05T04:35:00+00:00 [queued]>
+[2025-09-06T14:01:59.740+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: banvic_etl.extract_sql_db scheduled__2025-09-05T04:35:00+00:00 [queued]>
+[2025-09-06T14:01:59.741+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-09-06T14:01:59.784+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): extract_sql_db> on 2025-09-05 04:35:00+00:00
+[2025-09-06T14:01:59.801+0000] {standard_task_runner.py:60} INFO - Started process 185 to run task
+[2025-09-06T14:01:59.807+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'banvic_etl', 'extract_sql_db', 'scheduled__2025-09-05T04:35:00+00:00', '--job-id', '55', '--raw', '--subdir', 'DAGS_FOLDER/banvic_dag.py', '--cfg-path', '/tmp/tmp3ox5s1l3']
+[2025-09-06T14:01:59.810+0000] {standard_task_runner.py:88} INFO - Job 55: Subtask extract_sql_db
+[2025-09-06T14:02:00.051+0000] {task_command.py:423} INFO - Running <TaskInstance: banvic_etl.extract_sql_db scheduled__2025-09-05T04:35:00+00:00 [running]> on host 90038f871efe
+[2025-09-06T14:02:00.621+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='you' AIRFLOW_CTX_DAG_ID='banvic_etl' AIRFLOW_CTX_TASK_ID='extract_sql_db' AIRFLOW_CTX_EXECUTION_DATE='2025-09-05T04:35:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-05T04:35:00+00:00'
+[2025-09-06T14:01:58.912+0000] {logging_mixin.py:188} WARNING - /opt/airflow/scripts/extract_helpers.py:33 UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2025-09-06T14:01:59.120+0000] {logging_mixin.py:188} WARNING - /opt/airflow/scripts/extract_helpers.py:33 UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2025-09-06T14:01:59.207+0000] {logging_mixin.py:188} WARNING - /opt/airflow/scripts/extract_helpers.py:33 UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2025-09-06T14:01:59.329+0000] {python.py:201} INFO - Done. Returned value was: None
+[2025-09-06T14:01:59.384+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=banvic_etl, task_id=extract_sql_db, execution_date=20250905T043500, start_date=20250906T140159, end_date=20250906T140159
+[2025-09-06T14:01:59.453+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2025-09-06T14:01:59.538+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check

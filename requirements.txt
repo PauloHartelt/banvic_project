@@ -1,0 +1,1 @@
+pip install pandas psycopg2-binary sqlalchemy

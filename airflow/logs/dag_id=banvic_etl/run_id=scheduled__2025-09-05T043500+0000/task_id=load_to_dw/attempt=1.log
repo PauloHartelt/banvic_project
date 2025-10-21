@@ -1,0 +1,115 @@
+[2025-09-06T14:02:00.898+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: banvic_etl.load_to_dw scheduled__2025-09-05T04:35:00+00:00 [queued]>
+[2025-09-06T14:02:00.916+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: banvic_etl.load_to_dw scheduled__2025-09-05T04:35:00+00:00 [queued]>
+[2025-09-06T14:02:00.917+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-09-06T14:02:00.942+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): load_to_dw> on 2025-09-05 04:35:00+00:00
+[2025-09-06T14:02:00.955+0000] {standard_task_runner.py:60} INFO - Started process 191 to run task
+[2025-09-06T14:02:00.961+0000] {standard_task_runner.py:87} INFO - Running: ['airflow', 'tasks', 'run', 'banvic_etl', 'load_to_dw', 'scheduled__2025-09-05T04:35:00+00:00', '--job-id', '58', '--raw', '--subdir', 'DAGS_FOLDER/banvic_dag.py', '--cfg-path', '/tmp/tmp1d742u14']
+[2025-09-06T14:02:00.965+0000] {standard_task_runner.py:88} INFO - Job 58: Subtask load_to_dw
+[2025-09-06T14:02:01.169+0000] {task_command.py:423} INFO - Running <TaskInstance: banvic_etl.load_to_dw scheduled__2025-09-05T04:35:00+00:00 [running]> on host 90038f871efe
+[2025-09-06T14:02:01.490+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='you' AIRFLOW_CTX_DAG_ID='banvic_etl' AIRFLOW_CTX_TASK_ID='load_to_dw' AIRFLOW_CTX_EXECUTION_DATE='2025-09-05T04:35:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-05T04:35:00+00:00'
+[2025-09-06T14:02:01.894+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/home/airflow/.local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "pg_type_typname_nsp_index"
+DETAIL:  Key (typname, typnamespace)=(agencias, 2200) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/scripts/extract_helpers.py", line 54, in load_to_dw
+    df.to_sql(table, engine, if_exists='replace', index=False)  # idempotente
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/pandas/util/_decorators.py", line 333, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/pandas/core/generic.py", line 3008, in to_sql
+    return sql.to_sql(
+           ^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/pandas/io/sql.py", line 788, in to_sql
+    return pandas_sql.to_sql(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/pandas/io/sql.py", line 1948, in to_sql
+    table = self.prep_table(
+            ^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/pandas/io/sql.py", line 1852, in prep_table
+    table.create()
+  File "/home/airflow/.local/lib/python3.11/site-packages/pandas/io/sql.py", line 936, in create
+    self._execute_create()
+  File "/home/airflow/.local/lib/python3.11/site-packages/pandas/io/sql.py", line 922, in _execute_create
+    self.table.create(bind=self.pd_sql.con)
+  File "/home/airflow/.local/lib/python3.11/site-packages/sqlalchemy/sql/schema.py", line 962, in create
+    bind._run_ddl_visitor(ddl.SchemaGenerator, self, checkfirst=checkfirst)
+  File "/home/airflow/.local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2221, in _run_ddl_visitor
+    visitorcallable(self.dialect, self, **kwargs).traverse_single(element)
+  File "/home/airflow/.local/lib/python3.11/site-packages/sqlalchemy/sql/visitors.py", line 524, in traverse_single
+    return meth(obj, **kw)
+           ^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/sqlalchemy/sql/ddl.py", line 899, in visit_table
+    self.connection.execute(
+  File "/home/airflow/.local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1385, in execute
+    return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/sqlalchemy/sql/ddl.py", line 80, in _execute_on_connection
+    return connection._execute_ddl(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1477, in _execute_ddl
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/home/airflow/.local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/home/airflow/.local/lib/python3.11/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/home/airflow/.local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "pg_type_typname_nsp_index"
+DETAIL:  Key (typname, typnamespace)=(agencias, 2200) already exists.
+
+[SQL: 
+CREATE TABLE agencias (
+	cod_agencia BIGINT, 
+	nome TEXT, 
+	endereco TEXT, 
+	cidade TEXT, 
+	uf TEXT, 
+	data_abertura TEXT, 
+	tipo_agencia TEXT
+)
+
+]
+(Background on this error at: https://sqlalche.me/e/14/gkpj)
+[2025-09-06T14:02:01.990+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=banvic_etl, task_id=load_to_dw, execution_date=20250905T043500, start_date=20250906T140200, end_date=20250906T140201
+[2025-09-06T14:02:02.049+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 58 for task load_to_dw ((psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "pg_type_typname_nsp_index"
+DETAIL:  Key (typname, typnamespace)=(agencias, 2200) already exists.
+
+[SQL: 
+CREATE TABLE agencias (
+	cod_agencia BIGINT, 
+	nome TEXT, 
+	endereco TEXT, 
+	cidade TEXT, 
+	uf TEXT, 
+	data_abertura TEXT, 
+	tipo_agencia TEXT
+)
+
+]
+(Background on this error at: https://sqlalche.me/e/14/gkpj); 191)
+[2025-09-06T14:02:02.096+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-09-06T14:02:02.176+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check
